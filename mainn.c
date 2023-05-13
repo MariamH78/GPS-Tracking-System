@@ -30,7 +30,7 @@ int main(void){
 				toggle_clear = 0;
 			}
 			LCD_write_coords(lat, lon);
-			 if  (DIS =0 ) { 
+			/* if  (DIS =0 ) { 
         set_led (green_led , led_on ) ; 
         elseif (DIS <= 5 )  
             set_led (red_led , led_on);
@@ -42,7 +42,8 @@ int main(void){
 			* implement double get_distance(position current_pose)
 			* define target pose in header defines
 			*/
-		} else {
+		} */ 
+		else {
 			if (!toggle_clear){
 				LCD_CMD(0X01);
 				toggle_clear = 1;
