@@ -14,7 +14,11 @@ int main(void){
 	systick_init();
 	UART1_init();
 	LCD_INIT();
+	PortD_Init;
+                PortF_Init;
+                PortB_Init;
 	while(1){
+		 
 		char data[100] = {0};
 		size = filter_data(data);
 		coords = get_pose_from_filtered_data(data, size);
@@ -26,6 +30,12 @@ int main(void){
 				toggle_clear = 0;
 			}
 			LCD_write_coords(lat, lon);
+			 if  (DIS =0 ) { 
+        set_led (green_led , led_on ) ; 
+        elseif (DIS <= 5 )  
+            set_led (red_led , led_on);
+	else 
+		set_led (yellow_led , led_on); 
 			/* TODO:
 			* distance = get_distance(coords);
 			* ftoa(distance_double, distance_string);
