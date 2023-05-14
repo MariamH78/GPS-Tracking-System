@@ -2,7 +2,6 @@
 #define GPS_HEADER
 
 #include "UART.h"
-#include <stdlib.h>
 
 #define TARGET_LAT 30
 #define TARGET_LON 30

@@ -1,6 +1,4 @@
 #include "sysTick.h"
-#include "TM4C1234.h"
-#include "tm4c123gh6pm.h"
 
 void systick_init(void){
 	NVIC_ST_CTRL_R = 0;

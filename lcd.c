@@ -1,7 +1,4 @@
 #include "lcd.h"
-#include "TM4C1234.h"
-#include "tm4c123gh6pm.h"
-#include "sysTick.h"
 
 void LCD_INIT(void) {
 	SYSCTL_RCGCGPIO_R |=0x03;

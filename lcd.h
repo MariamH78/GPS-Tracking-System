@@ -2,6 +2,7 @@
 #define LCD_HEADER
 
 #include "tm4c123gh6pm.h"
+#include "sysTick.h"
 
 #define low_rs GPIO_PORTA_DATA_R &= ~(1 << 7);
 #define high_rs GPIO_PORTA_DATA_R |= (1 << 7);

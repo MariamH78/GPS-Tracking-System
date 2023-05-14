@@ -1,7 +1,5 @@
 #include "UART.h"
-#include "TM4C1234.h"
-#include "tm4c123gh6pm.h"
-#include "sysTick.h"
+
 void UART1_init(void){            // should be called only once
 	SYSCTL_RCGCUART_R |= 0x0002;  // activate UART1
 	delay_milli(1000);
