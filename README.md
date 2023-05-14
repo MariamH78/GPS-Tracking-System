@@ -29,9 +29,6 @@ Reset_Handler   PROC
 		ISB				
 				
                 IMPORT  __main
-               
-                
-                IMPORT  __main
                 LDR     R0, =__main
                 BX      R0
                 ENDP

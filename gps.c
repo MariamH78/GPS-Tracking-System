@@ -2,84 +2,84 @@
 
 void filter_data(position* current_pose) {
 	int lat_size = 0, lon_size = 0, comma_counter = 0;
-	char got_lat = 0, got_lon = 0, flag = 0;
-	double input = 0, deg;
+	char found_lat = 0, found_lon = 0, found_point = 0;
+	double accumulated_double = 0, degrees;
     
-	char d = UART1_read();
-	while (d != '$')
-		d = UART1_read();
+	char input_char = UART1_read();
+	
+	while (input_char != '$')
+		input_char = UART1_read();
 
-	double index = 10;
-	while (d != '*') {
-		
+	double power_of_ten = 10;
+	while (input_char != '*') {
 		switch (comma_counter){
 			case 2:
                 if (lat_size == 2){
-                    deg = input;
-                    input = 0;
+                    degrees = accumulated_double;
+                    accumulated_double = 0;
                 }
                 lat_size++;
 
-                if (d == ',')
+                if (input_char == ',')
                     break;
-                if (d == '.') {
-                    flag = 1;
+                if (input_char == '.') {
+                    found_point = 1;
                     break;
                 }
-                if (!flag) input = input*10 + (int)d - 48;
+                if (!found_point) accumulated_double = accumulated_double * 10 + (int)input_char - 48;
                 else {
-                    input = input + (((int)d - 48)/(index));
-                    index *= 10;
+                    accumulated_double = accumulated_double + (((int)input_char - 48) / power_of_ten);
+                    power_of_ten *= 10;
                 }
 
                 break;
 			case 3:
-			    if (!got_lat){
-                    got_lat = 1;
-                    index = 0;
+			    if (!found_lat){
+                    found_lat = 1;
+                    power_of_ten = 0;
                     if (lat_size > 1){
                         current_pose -> lat_exists = 1;
-                        current_pose -> latitude = deg + input/60.0;
-                        input = 0; flag = 0; index = 10;
+                        current_pose -> latitude = degrees + accumulated_double/60.0;
+                        accumulated_double = 0; found_point = 0; power_of_ten = 10;
                     }
 			    }
 				break;
 
 			case 4:
                 if (lon_size == 3){
-                    deg = input;
-                    input = 0;
+                    degrees = accumulated_double;
+                    accumulated_double = 0;
                 }
                 lon_size++;
 
-                if (d == ',')
+                if (input_char == ',')
                     break;
-                if (d == '.') {
-                    flag = 1;
+                if (input_char == '.') {
+                    found_point = 1;
                     break;
                 }
-                if (!flag) input = input*10 + (int)d - 48;
+                if (!found_point) accumulated_double = accumulated_double*10 + (int)input_char - 48;
                 else {
-                    input = input + ((int)d - 48)/ (index);
-                    index *= 10;
+                    accumulated_double = accumulated_double + ((int)input_char - 48)/ (power_of_ten);
+                    power_of_ten *= 10;
                 }
 
                 break;
 
 			case 5:
-			    if (!got_lon){
-                    got_lon= 1;
-                    index = 0;
+			    if (!found_lon){
+                    found_lon= 1;
+                    power_of_ten = 0;
                     if (lon_size > 1){
                         current_pose -> lon_exists = 1;
-                        current_pose -> longitude = deg + input / 60.0;
-                        input = 0;
+                        current_pose -> longitude = degrees + accumulated_double / 60.0;
+                        accumulated_double = 0;
                     }
                 }
 				break;
         }
-        if (d == ',') comma_counter++;
-        d = UART1_read();
+        if (input_char == ',') comma_counter++;
+        input_char = UART1_read();
     }
 }
 
