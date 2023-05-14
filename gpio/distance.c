@@ -1,4 +1,5 @@
 #include "distance.h"
+
 double toRadians(double degrees) {
     return degrees * M_PI / 180.0;
 }

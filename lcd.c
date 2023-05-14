@@ -50,14 +50,17 @@ void LCD_WRITE (char data ) {
 	low_en  					 //set the enable pin to low
 	delay_milli(1);
 }
-void LCD_write_coords(char* lat, char* lon){
+void LCD_write_coords(char* lat, char* lon, char* dist){
 	LCD_CMD(0x80); //first line
-	LCD_write_string("Lat: ");
+	LCD_write_string("Lat:");
 	LCD_write_string(lat);
+	LCD_write_string(" |DST");
 	
 	LCD_CMD(0XA8); //second line
-	LCD_write_string("Lon: ");
+	LCD_write_string("Lon:");
 	LCD_write_string(lon);
+	LCD_write_string(" |");
+	LCD_write_string(dist);
 	delay_milli(3);
 }
 void LCD_write_string(char* data){

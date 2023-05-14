@@ -17,7 +17,7 @@ void LCD_CMD(unsigned long cmd);
 void LCD_WRITE (char data );
 void LCD_INIT(void);
 void LCD_write_string(char* data);
-void LCD_write_coords(char* lat, char* lon);
+void LCD_write_coords(char* lat, char* lon, char* dist);
 
 #endif
 
