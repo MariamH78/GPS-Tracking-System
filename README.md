@@ -2,7 +2,7 @@
 # Embedded GPS destination follower on TM4C123GH6PM:
 ## Project description:
 
-This project aims to localize the user using the embedded program on the microcontroller, Tiva, and guide them to their destination co-ordinates (longitude, latitude) using a `NEO-6M GPS module`, a `16x2 LCD` and the board's `built-in LEDs`.
+This repo was submitted for Introduction to Embedded Systems' [CSE211s] final project. It aims to localize the user using the embedded program on the microcontroller, Tiva, and guide them to their destination co-ordinates (longitude, latitude) using a `NEO-6M GPS module`, a `16x2 LCD` and the board's `built-in LEDs`.
 
 ## How to use:
 The code was built and loaded using uVision's Keil (`4.0` and `5.0` work fine).
@@ -38,7 +38,7 @@ Reset_Handler   PROC
 5. Schematic of the connections are attached below.
   
 <p align="center">
-    <img width="710" src="https://github.com/Abdoemad220/Embedded_project/assets/99722575/4d70dd33-5126-4ef6-bfc7-02eaf05cd203" alt="Material Bread logo">
+    <img width="710" src="https://github.com/Abdoemad220/Embedded_project/assets/99722575/4d70dd33-5126-4ef6-bfc7-02eaf05cd203" alt="Schematic of used circuit.">
 </p>
   
     
@@ -47,10 +47,22 @@ __Important note:__ This repository's code assumes that the `NEO-6M GPS` module 
 
 ## What to expect when running the project:
 While the GPS module tries to find a fix on the user's position, the module's red built-in led will keep blinking, and the LCD should display `"Fix not found!"` with a blinking cursor, each blink signifies a new attempt at finding a position.
+<p align="center">
+    <img src="https://github.com/Abdoemad220/Embedded_project/assets/99722575/c60c897a-e8f2-43ea-b3d3-b6fa9169c5b2" alt="LCD showing "Fix not found!\"">
+</p>
+  
 
-After a fix has been found, the LCD will display the user's current location (longitude, latitude).
+After a fix has been found, the LCD will display the user's current location (longitude, latitude), as well as the distance (in `m`) required to reach their target.
+<p align="center">
+    <img src="https://github.com/Abdoemad220/Embedded_project/assets/99722575/d8875f8f-09ad-45a1-a364-45863dc65aa5" alt="LCD showing latitude, longitude, and distance.">
+</p>
+  
+  
+When target reaches their destination (within `1m`) the built-in led turns `green`, when distance is less than `5m` the Tiva's built-in led will turn `yellow`, otherwise the led remains `red`.
+  
+
+
+
 
 ## To-be implemented:
-The `built-in leds` on the TM4C123x should guide the user to their destination by lighting up `red` when they're far away, `yellow` when they're closer, and `green` when they're there. 
-  
-The LCD should also display the remaining `distance` until the user's destination.
+The code can be modified to show the angle the user is required to take to reach their destination.
